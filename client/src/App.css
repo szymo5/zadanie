@@ -112,6 +112,10 @@ form{
     padding: 7px;
 }
 
+.error{
+    border: 1px solid red;
+}
+
 .auth-container span{
     padding: 8px;
     border-radius: 50%;
@@ -131,6 +135,14 @@ form{
     cursor: pointer;
     font-size: 15px;
     box-sizing: content-box;
+}
+
+.label-error{
+    color: red;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: -10px;
 }
 
 
