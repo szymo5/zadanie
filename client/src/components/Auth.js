@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { signUp } from "../utils/signUp";
-import { signIn } from "../utils/signIn";
+import { signin, signup } from "../utils/auth";
 
 const initialsState = {username: "", email:'', password:'', confirmPassword:''};
 
 const Auth = () => {
     const [isSignup, setIsSignup] = useState(false);
     const [formData, setFormData] = useState(initialsState);
+
+    const navigate = useNavigate();
 
     const [isError, setIsError] = useState({errorType: '', error: false, errorMsg: ''});
 
@@ -19,10 +21,10 @@ const Auth = () => {
         e.preventDefault();
 
         if(isSignup){
-            signUp(formData, setIsError);
+            signup(formData, setIsError, navigate);
             console.log(formData);
         } else {
-            signIn(formData, setIsError);
+            signin(formData, setIsError, navigate);
             console.log(formData);
         }
     }
