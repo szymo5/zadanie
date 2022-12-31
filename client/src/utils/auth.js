@@ -11,13 +11,17 @@ export const signup = async (formData, setIsError, navigate) => {
         const {data} = await api.signUp(formData);
         console.log(data);
 
-        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('user', JSON.stringify(data.user));
 
         navigate('/');
       
 
     } catch (error) {
-        setIsError(error);
+        if(error?.response?.data){
+            setIsError(error.response.data);
+        } else {
+            setIsError(error);
+        }
     }
 }
 
@@ -33,14 +37,18 @@ export const signin = async (formData, setIsError, navigate) => {
         }
 
         const {data} = await api.signIn(formData);
-        console.log(data);
+        console.log(data.user);
 
-        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('user', JSON.stringify(data.user));
 
         navigate('/');
       
 
     } catch (error) {
-        setIsError(error);
+        if(error?.response?.data){
+            setIsError(error.response.data);
+        } else {
+            setIsError(error);
+        }
     }
 }

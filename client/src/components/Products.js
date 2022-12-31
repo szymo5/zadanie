@@ -1,19 +1,20 @@
 import { useEffect } from "react";
+import { fetchData } from "../api";
 
 
 const Products = ({products, setProducts, category, user}) => {
 
     useEffect(() => {
         const fetchProductsData = async () => {
-            const productsData = [];
+            //let productsData = [];
 
             if(category !== ''){
                 //fetch data from server in query string add category
-                productsData.push("Test");
-                productsData.push("Rokeiciny");
-            }
-
-            setProducts(productsData);
+                const {data} = await fetchData(category);
+                setProducts(data);
+                //productsData = await fetchData(category);
+            } 
+            
         }
 
         fetchProductsData();
@@ -26,7 +27,7 @@ const Products = ({products, setProducts, category, user}) => {
                 <div className="info">Zaloguj się aby móc przeglądać produkty</div> 
             : (
                 products.map(product => (
-                    <div>{product}</div>
+                    <div>{product?.name}</div>
                 )))
             }
         </div>

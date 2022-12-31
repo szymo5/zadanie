@@ -1,36 +1,61 @@
-import { user } from "../data.js"
+//import { user } from "../data.js"
 import {randomBytes} from 'crypto';
 import validator from 'validator'
+import {writeFile, readFile} from 'fs/promises';
 
-export const signup = (req, res) => {
-    const {username, email, password, confirmPassword} = req.body;
+export const signup = async (req, res) => {
+    try {
+        const {username, email, password, confirmPassword} = req.body;
 
-    const isEmail = validator.isEmail(email);
-    if(!isEmail) return res.status(400).json({errorType: 'email', error: true, errorMsg: 'Podano nieprawidłowy email'})
+        const data = await readFile("./database/users.json");
+        const users = JSON.parse(data);
 
-    if(password !== confirmPassword) return res.status(400).json({errorType: 'password', error: true, errorMsg: 'Podane hasła różnią się'});
+        const isEmail = validator.isEmail(email);
+        if(!isEmail) return res.status(400).json({errorType: 'email', error: true, errorMsg: 'Podano nieprawidłowy email'})
 
-    const existingUsername = user.find((u) => u.username === username);
-    if(existingUsername) return res.status(400).json({errorType: 'username', error: true, errorMsg: 'Użytkownik o podanej nazwie już istnieje'})
+        if(password !== confirmPassword) return res.status(400).json({errorType: 'password', error: true, errorMsg: 'Podane hasła różnią się'});
 
-    const existingEmail = user.find((u) => u.email === email);
-    if(existingEmail) return res.status(400).json({errorType: 'email', error: true, errorMsg: 'Użytkownik o podanym email już istnieje'})
+        const existingUsername = users.find((u) => u.username === username);
+        if(existingUsername) return res.status(400).json({errorType: 'username', error: true, errorMsg: 'Użytkownik o podanej nazwie już istnieje'})
 
-    const userId = randomBytes(4).toString('hex');
-    const newUser = {id: userId, username, email, password, root: false};
+        const existingEmail = users.find((u) => u.email === email);
+        if(existingEmail) return res.status(400).json({errorType: 'email', error: true, errorMsg: 'Użytkownik o podanym email już istnieje'})
 
-    user.push(newUser);
+        const userId = randomBytes(4).toString('hex');
+        const newUser = {id: userId, username, email, password, root: false};
 
-    res.status(201).json({user: newUser});
+        users.push(newUser);
+
+        //user.push(newUser);
+
+        await writeFile("./database/users.json", JSON.stringify(users));
+
+        res.status(201).json({user: newUser});
+
+    } catch (error) {
+        console.log(error);
+    }
+    
 }
 
-export const signin = (req, res) => {
-    const {username, password} = req.body;
+export const signin = async (req, res) => {
+    try {
+        const {username, password} = req.body;
 
-    const isUser = user.find((u) => u.username === username);
-    if(!isUser) return res.status(400).json({errorType: 'username', error: true, errorMsg: 'Użytkownik o podanej nazwie nie istnieje'})
+        const data = await readFile("./database/users.json");
+        
+        const users = JSON.parse(data);
+        console.log(users)
 
-    if(isUser.password !== password) return res.status(400).json({errorType: 'password', error: true, errorMsg: 'Nieprawidłowe hasło'})
+        const isUser = users.find((u) => u.username === username);
+        if(!isUser) return res.status(400).json({errorType: 'username', error: true, errorMsg: 'Użytkownik o podanej nazwie nie istnieje'})
 
-    res.status(200).json({user: isUser});
+        if(isUser.password !== password) return res.status(400).json({errorType: 'password', error: true, errorMsg: 'Nieprawidłowe hasło'})
+
+        res.status(200).json({user: isUser});
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
 }

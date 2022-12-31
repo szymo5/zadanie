@@ -44,6 +44,17 @@ body{
 a{
     text-decoration: none;
 }
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #555;
+    color: #fff;
+    font-weight: bolder;
+    display: grid;
+    place-content: center;
+    font-size: 18px;
+}
 /* ----- */
 
 /* Category */
