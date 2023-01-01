@@ -156,5 +156,57 @@ form{
     margin-bottom: -10px;
 }
 
+/* ----- */
+
+/* Product */
+/* .products-grid{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+} */
+
+/* .products-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 25px 25px;
+    grid-auto-flow: row;
+} */
+
+.products-grid{
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+.product-container{
+    width: 295px;
+    /* height: 200px; */
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+
+  .h { grid-area: h; }
+  
+  .k { grid-area: k; }
+  
+  .l { grid-area: l; }
+  
+  .o { grid-area: o; }
+  
+  .p { grid-area: p; }
+  
+  .pp { grid-area: pp; }
+  
+
 
 /* ----- */

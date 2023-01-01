@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { fetchData } from "../api";
 
+import ProductCard from "./ProductCard";
 
 const Products = ({products, setProducts, category, user}) => {
 
@@ -26,9 +27,13 @@ const Products = ({products, setProducts, category, user}) => {
             {!user && (category !== '') ? 
                 <div className="info">Zaloguj się aby móc przeglądać produkty</div> 
             : (
-                products.map(product => (
-                    <div>{product?.name}</div>
-                )))
+                <div className="products-grid">
+                    {
+                        products.map((product, index) => (
+                        <ProductCard product={product} key={index}/>))
+                    }
+                </div>
+            )
             }
         </div>
      );
