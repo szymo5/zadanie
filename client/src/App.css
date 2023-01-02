@@ -159,27 +159,13 @@ form{
 /* ----- */
 
 /* Product */
-/* .products-grid{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-} */
-
-/* .products-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 25px 25px;
-    grid-auto-flow: row;
-} */
-
 .products-grid{
     width: 100%;
+    /* max-width: 1400px; */
     margin: 0 auto;
     display: grid;
-    gap: 1rem;
+    justify-content: center;
+    gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
@@ -189,24 +175,40 @@ form{
     /* height: 200px; */
     border: 1px solid #ccc;
     text-align: center;
+    margin: auto;
     margin-bottom: 20px;
 }
-
-
-
-
-  .h { grid-area: h; }
-  
-  .k { grid-area: k; }
-  
-  .l { grid-area: l; }
-  
-  .o { grid-area: o; }
-  
-  .p { grid-area: p; }
-  
-  .pp { grid-area: pp; }
-  
-
-
 /* ----- */
+
+/* Pagination */
+.pagination-container{
+    margin: auto;
+    justify-content: center;
+    height: 150px;
+}
+.paginate-box{
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.paginate{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    font-size: 18px;
+    color: #555;
+    margin: 0 10px 10px 10px;
+    cursor: pointer;
+}
+
+.active-page{
+    background-color:#ccc;
+}
+
+/* ---- */
+
+/* Product-card     */
+
+/* ---- */
