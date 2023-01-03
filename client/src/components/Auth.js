@@ -41,7 +41,7 @@ const Auth = () => {
                 lock
             </span>
             <h2 style={{color: '#555', marginTop: '10px'}}>{isSignup ?  'Rejestracja' : 'Logowanie'}</h2>
-            <form className="flex" onSubmit={handleSubmit}>
+            <form className="auth-form flex" onSubmit={handleSubmit}>
                 {(isError.errorType === "username" && isError.error) && <label className="label-error">{isError.errorMsg}</label>}
                 <input type="text" name="username" value={formData.username} className={(isError.errorType === "username" && isError.error) ? "form-input  error" : "form-input"} placeholder="Nazwa użytkownika*"  onChange={handleChange}/>
                 
