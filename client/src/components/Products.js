@@ -49,6 +49,8 @@ const Products = ({products, setProducts, category, user}) => {
         
     }, [category])
 
+    const childProps = {setProducts, category, isDelete, setIsDelete, currentProducts, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId};
+
     return ( 
         <div className="products-container">
             {!user && (category !== '') ? 
@@ -61,18 +63,7 @@ const Products = ({products, setProducts, category, user}) => {
                                 <ProductCard 
                                     product={product} 
                                     key={index} 
-                                    canDelete={user?.root ? true : false} 
-                                    setProducts={setProducts} 
-                                    category={category} 
-                                    isDelete={isDelete} 
-                                    setIsDelete={setIsDelete}
-                                    currentProducts={currentProducts}
-                                    setCurrentPage={setCurrentPage}
-                                    user={user}
-                                    isCreate={isCreate}
-                                    setIsCreate={setIsCreate}
-                                    currentId={currentId}
-                                    setCurrentId={setCurrentId}
+                                    {...childProps}
                                 />
                             ))
                         }
