@@ -3,10 +3,12 @@ import { fetchData } from "../api";
 
 import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
+import Search from "./Search";
 
 
 const Products = ({products, setProducts, category, user}) => {
-    // tutaj state od currentID i podany do form jeden form w create component a drugi w product card
+    const [isSearch, setIsSearch] = useState(false);
+
     const [isDelete, setIsDelete] = useState(false);
     const [currentId, setCurrentId] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
@@ -28,10 +30,8 @@ const Products = ({products, setProducts, category, user}) => {
 
     useEffect(() => {
         const fetchProductsData = async () => {
-            //let productsData = [];
 
             if(category !== ''){
-                //fetch data from server in query string add category
                 const {data} = await fetchData(category);
 
                 if (user?.root){
@@ -39,7 +39,6 @@ const Products = ({products, setProducts, category, user}) => {
                 }
 
                 setProducts(data);
-                //productsData = await fetchData(category);
                
             } 
             
@@ -49,32 +48,68 @@ const Products = ({products, setProducts, category, user}) => {
         
     }, [category])
 
-    const childProps = {setProducts, category, isDelete, setIsDelete, currentProducts, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId};
+    const childProps = {setProducts, category, isDelete, setIsDelete, currentProducts, currentPage, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId, setIsSearch};
+
+    if(category === '') return
 
     return ( 
-        <div className="products-container">
-            {!user && (category !== '') ? 
-                <div className="info">Zaloguj się aby móc przeglądać produkty</div> 
-            : (
-                <>
-                    <div className="products-grid">
-                        {
-                            currentProducts.map((product, index) => (
-                                <ProductCard 
-                                    product={product} 
-                                    key={index} 
-                                    {...childProps}
-                                />
-                            ))
+            <div className="products-container">
+                {!user ? 
+                    <div className="info">Zaloguj się aby móc przeglądać produkty</div> 
+                : (
+                    <>
+                        {isSearch ? (
+                            products.length === 0 ? (
+                                <>
+                                    <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/>
+                                    <div className="info">Brak wyników wyszukiwania</div> 
+                                </>
+                            ) : (
+                                <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/>
+                            )
+                        ) : (
+                            user.root ? (
+                                products.length > 1 && <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/>
+                            ) : (
+                                products.length > 0 ? <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/> : <div className="info">Brak produktów</div>
+                            )
+                        )
                         }
-                    </div>
-                    {
-                        products.length > 8 && <Pagination currentPage={currentPage} products={products} productsPerPage={productsPerPage} paginate={paginate}/>
-                    }
-                </>
-            )
-            }
-        </div>
+
+
+                        {/* {isSearch && products.length === 0 ? (
+                            <>
+                                <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/>
+                                <div className="info">Brak wyników wyszukiwania</div> 
+                            </>
+                            
+                        ):(
+                            user.root ? (
+                                products.length > 1 && <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/>
+                            ) : (
+                                products.length > 0 ? <Search products={products} setProducts={setProducts} category={category} setCurrentPage={setCurrentPage} isSearch={isSearch} setIsSearch={setIsSearch}/> : <div className="info">Brak produktów</div>
+                            )
+                        )} */}
+                        
+                        <div className="products-grid">
+                            {
+                                currentProducts.map((product, index) => (
+                                    <ProductCard 
+                                        product={product} 
+                                        key={index} 
+                                        {...childProps}
+                                    />
+                                ))
+                            }
+                        </div>
+
+                        {
+                            products.length > 8 && <Pagination currentPage={currentPage} products={products} productsPerPage={productsPerPage} paginate={paginate}/>
+                        }
+                    </>
+                )
+                }
+            </div>
      );
 }
  

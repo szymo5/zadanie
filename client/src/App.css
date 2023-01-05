@@ -124,7 +124,7 @@ a{
 }
 
 .error{
-    border: 1px solid red;
+    border: 1px solid red !important;
 }
 
 .auth-container span{
@@ -164,9 +164,8 @@ a{
     /* max-width: 1400px; */
     margin: 0 auto;
     display: grid;
-    justify-content: center;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .product-container{
     width: 295px;
@@ -179,21 +178,22 @@ a{
 }
 
 .delete-info{
-    /* position: absolute;
-    top: 50%;
-    left: 50%; */
     width: 100%;
     justify-content: center;
-    /* transform: translate(-50%, -50%); */
     animation: animate 0.5s;
 }
 
-/* .add-button{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
+
+.img{
+    width: 280px;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
 /* ----- */
 
 /* Pagination */
@@ -265,7 +265,40 @@ a{
 }
 /* ---- */
 
+/* Search */
+.search-container {
+    width: 100%;
+}
+.search{
+    width: 297px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin: 0 0 20px 5px;
+}
+.search-input{
+    width: 225px;
+    outline: none;
+    padding: 0;
+    padding: 7px;
+    border: 0;
+    text-align: center;
+}
+
+/* ----- */
+
 @keyframes animate{
     from {transform: scale(0);}
     to {transform: scale(1);}
+}
+
+/* RWD */
+
+@media only screen and (max-width: 920px) {
+    .navbar-box {
+        width: 100%;
+    }
+    .logo{
+        margin: 0;
+    }
 }

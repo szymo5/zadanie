@@ -1,5 +1,6 @@
 import {randomBytes} from 'crypto';
 import {writeFile, readFile} from 'fs/promises';
+import { imgResize } from '../utils/imgResize.js';
 
 export const getProducts = async (req, res) => {
     try {
@@ -62,6 +63,10 @@ export const createProduct = async (req, res) => {
     try {
         const {category} = req.query;
         const newProduct = req.body
+
+        if(newProduct.imgURL === '') newProduct.imgURL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBgLOQG7kYu4G379F_QX2S61dloRBGcG0DvCe__cOvUhNvpMfaJKwTv2z_wXgBMGsCJWY&usqp=CAU';
+
+        newProduct.imgURL = await imgResize(newProduct.imgURL);
 
         const productId = randomBytes(4).toString('hex'); 
         newProduct.id = productId

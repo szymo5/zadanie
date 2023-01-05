@@ -24,7 +24,7 @@ const Navbar = () => {
                 <Link to="/">
                     <div className="logo">My App</div>
                 </Link>
-                <div className='flex' style={{justifyContent: 'space-around', width: user?.root ? '150px' :'100px'}}>
+                <div className='flex' style={{justifyContent: 'space-between', width: user?.root ? '125px' : '80px'}}>
                     {user?.root && (
                         <span className="material-symbols-outlined" style={{fontSize: '28px', color: '#555'}} title="admin mode">school</span>
                         )

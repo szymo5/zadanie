@@ -3,7 +3,7 @@ import { deleteProduct } from "../api"
 import CreateProduct from "./CreateProduct";
 import Form from "./Form";
 
-const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete, currentProducts, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId}) => {
+const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete, currentPage, currentProducts, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId, setIsSearch}) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     const handleDelete = async () => {
@@ -15,9 +15,16 @@ const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete
 
         setProducts(data);
 
-        if(currentProducts.length === 1) {
+        setTimeout(()=> {
+            console.log(currentProducts);
+        },1000)
+        
+
+        if(currentProducts.length === 1 && currentPage !== 1) {
             setCurrentPage((prev) => prev-1)
         }
+
+        setIsSearch(false);
     }
 
     if(product.name === "form") return <CreateProduct isCreate={isCreate} setIsCreate={setIsCreate} setCurrentId={setCurrentId} category={category} setProducts={setProducts}/>
@@ -32,6 +39,7 @@ const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete
                     currentProducts={currentProducts} 
                     category={category} 
                     setProducts={setProducts}
+                    setIsSearch={setIsSearch}
                 /> 
             : 
                 (isDelete === product.id) ? (
@@ -49,7 +57,8 @@ const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete
                 ) : (
                     <div style={{width: '100%'}}>
                         <h3>{product.name}</h3>
-                        <img src={product.imgURL} alt="product" width="100%" height="200px" style={{padding: '8px', boxSizing: 'border-box'}}/>
+                        <div className="img" style={{backgroundImage: `url(${product.imgURL})`}}></div>
+                        {/* <img src={product.imgURL} alt="product" width="100%" height="200px" style={{padding: '8px', boxSizing: 'border-box'}}/> */}
                         <p>Cena: {product.price} zł</p>
                         <div className="flex" style={{width: '75px', justifyContent: 'space-between', padding: '10px', boxSizing: 'border-box'}}>
                             <span className="material-symbols-outlined" style={{color: '#555', cursor: 'pointer'}} onClick={() => {setIsCreate(false); setCurrentId(product.id)}}>
