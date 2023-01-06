@@ -267,14 +267,20 @@ a{
 
 /* Search */
 .search-container {
+    /* width: 100%; */
     width: 100%;
+    /* max-width: 1400px; */
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .search{
     width: 297px;
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 2px;
-    margin: 0 0 20px 5px;
+    margin: 0 auto 20px auto;
 }
 .search-input{
     width: 225px;

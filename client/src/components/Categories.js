@@ -9,8 +9,8 @@ const Categories = ({category, setCategory}) => {
 
     return ( 
         <div className="category-container flex">
-           {categoryList.map(c => (
-                <div className={c.query === category ? "category flex active" : "category flex" } onClick={() => setCategory(c.query)}>
+           {categoryList.map((c,i) => (
+                <div className={c.query === category ? "category flex active" : "category flex" } onClick={() => setCategory(c.query)} key={i}>
                     {c.name}
                 </div>        
            ))}
