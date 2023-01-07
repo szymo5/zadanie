@@ -104,7 +104,7 @@ a{
 
 .auth-container{
     margin: auto;
-    width: 25%;
+    width: 335px;
     height: 250px;
 }
 .auth-form{
@@ -161,7 +161,6 @@ a{
 /* Product */
 .products-grid{
     width: 100%;
-    /* max-width: 1400px; */
     margin: 0 auto;
     display: grid;
     gap: 2rem;
@@ -267,9 +266,7 @@ a{
 
 /* Search */
 .search-container {
-    /* width: 100%; */
     width: 100%;
-    /* max-width: 1400px; */
     margin: 0 auto;
     display: grid;
     gap: 2rem;
@@ -306,5 +303,54 @@ a{
     }
     .logo{
         margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1700px) {
+    .category-container{
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 1550px) {
+    .category-container{
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .category-container{
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .category-container{
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .category-container{
+        width: 100%;
+        height: 170px;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .category{
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .auth-container{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .home-container{
+        width: 100%
     }
 }

@@ -13,7 +13,7 @@ const App = () => {
             <Navbar/>
             <Routes>
                 <Route path='/' exact element={<Home/>}/>
-                <Route path='/auth' exact element={!user ? <Login/> : <Navigate replace to="/"/>}/>
+                <Route path='/auth' exact element={!user ? <Login/> : <Navigate redirect to="/"/>}/>
             </Routes>
         </div>
     )

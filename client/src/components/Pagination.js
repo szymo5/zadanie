@@ -9,8 +9,8 @@ const Pagination = ({currentPage, products, productsPerPage, paginate}) => {
         <div className="pagination-container flex">
                 <div className="paginate-box flex">
                     {
-                        pages.map(page => (
-                            <div className={currentPage === page ? "paginate  active-page" : "paginate"} onClick={() => paginate(page)}>
+                        pages.map((page, key) => (
+                            <div className={currentPage === page ? "paginate  active-page" : "paginate"} onClick={() => paginate(page)} key={key}>
                                 {page}
                             </div>
                         ))

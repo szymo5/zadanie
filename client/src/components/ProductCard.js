@@ -3,7 +3,7 @@ import { deleteProduct } from "../api"
 import CreateProduct from "./CreateProduct";
 import Form from "./Form";
 
-const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete, currentPage, currentProducts, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId, setIsSearch}) => {
+const ProductCard = ({product, setProducts, category, isDelete, setIsDelete, currentPage, currentProducts, setCurrentPage, isCreate, setIsCreate, currentId, setCurrentId, setIsSearch}) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     const handleDelete = async () => {
@@ -30,7 +30,7 @@ const ProductCard = ({product, key, setProducts, category, isDelete, setIsDelete
     if(product.name === "form") return <CreateProduct isCreate={isCreate} setIsCreate={setIsCreate} setCurrentId={setCurrentId} category={category} setProducts={setProducts}/>
 
     return (  
-        <div className="product-container flex" style={{justifyContent: "center"}} key={key}>
+        <div className="product-container flex" style={{justifyContent: "center"}}>
             {currentId === product.id ? 
                 <Form 
                     setIsCreate={setIsCreate} 

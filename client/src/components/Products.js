@@ -93,10 +93,10 @@ const Products = ({products, setProducts, category, user}) => {
                         
                         <div className="products-grid">
                             {
-                                currentProducts.map((product, index) => (
+                                currentProducts.map((product, key) => (
                                     <ProductCard 
                                         product={product} 
-                                        key={index} 
+                                        key={key} 
                                         {...childProps}
                                     />
                                 ))

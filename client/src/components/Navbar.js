@@ -14,7 +14,7 @@ const Navbar = () => {
 
     const logout = () => {
         localStorage.clear();
-        navigate('/auth');
+        navigate(0);
     }
 
 
