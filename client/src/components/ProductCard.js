@@ -58,7 +58,6 @@ const ProductCard = ({product, setProducts, category, isDelete, setIsDelete, cur
                     <div style={{width: '100%'}}>
                         <h3>{product.name}</h3>
                         <div className="img" style={{backgroundImage: `url(${product.imgURL})`}}></div>
-                        {/* <img src={product.imgURL} alt="product" width="100%" height="200px" style={{padding: '8px', boxSizing: 'border-box'}}/> */}
                         <p>Cena: {product.price} zł</p>
                         <div className="flex" style={{width: '75px', justifyContent: 'space-between', padding: '10px', boxSizing: 'border-box'}}>
                             <span className="material-symbols-outlined" style={{color: '#555', cursor: 'pointer'}} onClick={() => {setIsCreate(false); setCurrentId(product.id)}}>

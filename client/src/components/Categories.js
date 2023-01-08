@@ -1,5 +1,3 @@
-
-
 const Categories = ({category, setCategory}) => {
     const categoryList = [{name: "Gry planszowe", query: "games"},
                           {name: "Samochody elektryczne", query: "cars"},
