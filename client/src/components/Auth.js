@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {TailSpin} from 'react-loader-spinner'
+
 
 import { signin, signup } from "../utils/auth";
 
@@ -8,6 +10,7 @@ const initialsState = {username: "", email:'', password:'', confirmPassword:''};
 const Auth = () => {
     const [isSignup, setIsSignup] = useState(false);
     const [formData, setFormData] = useState(initialsState);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -17,16 +20,17 @@ const Auth = () => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        setIsLoading(true);
         e.preventDefault();
 
         if(isSignup){
-            signup(formData, setIsError, navigate);
-            console.log(formData);
+            await signup(formData, setIsError, navigate);
         } else {
-            signin(formData, setIsError, navigate);
-            console.log(formData);
+            await signin(formData, setIsError, navigate);
         }
+
+        setIsLoading(false);
     }
 
     const switchSign = () => {
@@ -34,6 +38,21 @@ const Auth = () => {
         setIsError({errorType: '', error: false, errorMsg: ''});
         setFormData(initialsState);
     }
+
+
+    if(isLoading) return (
+        <div className="flex" style={{justifyContent: 'center', height: '100%'}}>
+            <TailSpin
+                className="loader"
+                height="40"
+                width="40"
+                color="#555"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                visible={true}
+            />
+        </div>
+    )
 
     return ( 
         <div className="auth-container" style={{height: isSignup ? '255px' : '165px'}}>
@@ -52,7 +71,7 @@ const Auth = () => {
                 <input type="password" name="password" value={formData.password} className={(isError.errorType === "password" && isError.error) ? "form-input  error" : "form-input"} placeholder="Hasło*"  onChange={handleChange}/>
                 
                 {(isSignup && isError.errorType === "confirmPassword" && isError.error) && <label className="label-error">{isError.errorMsg}</label>}
-                {isSignup && <input type="confirmPassword" name="confirmPassword" value={formData.confirmPassword} className={(isError.errorType === "confirmPassword" && isError.error) ? "form-input  error" : "form-input"} placeholder="Powtórz hasło*"  onChange={handleChange}/>}
+                {isSignup && <input type="password" name="confirmPassword" value={formData.confirmPassword} className={(isError.errorType === "confirmPassword" && isError.error) ? "form-input  error" : "form-input"} placeholder="Powtórz hasło*"  onChange={handleChange}/>}
                 
                 <button type="submit" className="btn">{isSignup ?  'Zarejestruj się' : 'Zaloguj się'}</button>
             </form>
